@@ -1,0 +1,76 @@
+.file_main {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+  height: fit-content;
+  cursor: pointer;
+  align-items: center;
+  padding: 5px;
+}
+
+.action_icons {
+  display: flex;
+  gap: 0.25rem;
+  padding-top: 1px;
+  justify-content: flex-end;
+  visibility: hidden;
+}
+
+.file_main:hover .action_icons {
+  visibility: visible;
+}
+
+.file_sub {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.file_sub > p {
+  color: white;
+  padding-top: 2.5px;
+}
+
+.normal_icon {
+  padding: 3px;
+  color: white;
+  height: 22px;
+  width: 22px;
+}
+
+.icons {
+  padding: 3px;
+  color: white;
+  height: 22px;
+  width: 22px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.icons:hover {
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.folder {
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+}
+
+.new_item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-left: 20px;
+}
+
+.new_item input {
+  margin-left: 5px;
+  padding: 3px;
+  border: 1px solid gray;
+  border-radius: 3px;
+}

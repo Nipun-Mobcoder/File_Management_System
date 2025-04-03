@@ -18,7 +18,8 @@ const FileComponent = ({
   setOpen,
   handleInsertNode,
   handleDeleteNode,
-  handleUpdateFolder
+  handleUpdateFolder,
+  handleFileSelect,
 }: {
   folderData: FolderItem;
   open: boolean;
@@ -26,6 +27,7 @@ const FileComponent = ({
   handleInsertNode: (folderId: number, name: string, isFolder: boolean) => void;
   handleDeleteNode: (folderId: number) => void;
   handleUpdateFolder: (folderId: number, name: string) => void;
+  handleFileSelect?: (id: number, content: string, fileName: string, isFolder: boolean) => void;
 }) => {
   const [newItemName, setNewItemName] = useState("");
   const [isAdding, setIsAdding] = useState<null | "file" | "folder">(null);
@@ -42,33 +44,75 @@ const FileComponent = ({
     setIsAdding(null);
   };
 
+  const handleClick = () => {
+    if (!folderData.isFolder && handleFileSelect) {
+      handleFileSelect(folderData.id, folderData.content || "", folderData.name, folderData.isFolder);
+    }
+    setOpen((prev) => !prev)
+  };
+
   return (
     <div>
-      <div className={styles.file_main} onClick={() => setOpen((prev) => !prev)}>
+      <div
+        className={styles.file_main}
+        onClick={handleClick}
+      >
         <div className={styles.file_sub}>
           {folderData.items && folderData.items.length > 0 ? (
-            open ? <VscChevronDown className={styles.normal_icon} /> : <VscChevronRight className={styles.normal_icon} />
+            open ? (
+              <VscChevronDown className={styles.normal_icon} />
+            ) : (
+              <VscChevronRight className={styles.normal_icon} />
+            )
           ) : null}
 
-          {folderData.isFolder ? <VscFolder className={styles.normal_icon} /> : <VscFile className={styles.normal_icon} />}
+          {folderData.isFolder ? (
+            <VscFolder className={styles.normal_icon} />
+          ) : (
+            <VscFile className={styles.normal_icon} />
+          )}
           <p>{folderData.name}</p>
         </div>
 
-        <div className={styles.action_icons} onClick={(e) => e.stopPropagation()}>
+        <div
+          className={styles.action_icons}
+          onClick={(e) => e.stopPropagation()}
+        >
           {folderData.isFolder && (
             <>
-              <VscNewFolder className={styles.icons} onClick={() => handleAddNew(true)} />
-              <VscNewFile className={styles.icons} onClick={() => handleAddNew(false)} />
+              <VscNewFolder
+                className={styles.icons}
+                onClick={() => handleAddNew(true)}
+              />
+              <VscNewFile
+                className={styles.icons}
+                onClick={() => handleAddNew(false)}
+              />
             </>
           )}
-          <VscEdit className={styles.icons} onClick={() => handleUpdateFolder(folderData.id, prompt("Rename to?", folderData.name) || folderData.name)} />
-          <VscTrash className={styles.icons} onClick={() => handleDeleteNode(folderData.id)} />
+          <VscEdit
+            className={styles.icons}
+            onClick={() =>
+              handleUpdateFolder(
+                folderData.id,
+                prompt("Rename to?", folderData.name) || folderData.name
+              )
+            }
+          />
+          <VscTrash
+            className={styles.icons}
+            onClick={() => handleDeleteNode(folderData.id)}
+          />
         </div>
       </div>
 
       {isAdding && (
         <div className={styles.new_item}>
-          {isAdding === "folder" ? <VscFolder className={styles.normal_icon} /> : <VscFile className={styles.normal_icon} />}
+          {isAdding === "folder" ? (
+            <VscFolder className={styles.normal_icon} />
+          ) : (
+            <VscFile className={styles.normal_icon} />
+          )}
           <input
             type="text"
             value={newItemName}

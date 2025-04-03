@@ -8,13 +8,16 @@ const Folders = ({
   handleInsertNode,
   handleDeleteNode,
   handleUpdateFolder,
+  handleFileSelect,
 }: {
   explorerData: FolderItem;
   handleInsertNode: (folderId: number, name: string, isFolder: boolean) => void;
   handleDeleteNode: (folderId: number) => void;
   handleUpdateFolder: (folderId: number, name: string) => void;
+  handleFileSelect?: (id: number, content: string, fileName: string, isFolder: boolean) => void;
 }) => {
   const [open, setOpen] = useState(false);
+  
 
   return (
     <div className={styles.folder}>
@@ -25,6 +28,7 @@ const Folders = ({
         handleInsertNode={handleInsertNode}
         handleDeleteNode={handleDeleteNode}
         handleUpdateFolder={handleUpdateFolder}
+        handleFileSelect={handleFileSelect}
       />
       {open && (
         <div className={styles.folder_children}>
@@ -35,6 +39,7 @@ const Folders = ({
               handleInsertNode={handleInsertNode}
               handleDeleteNode={handleDeleteNode}
               handleUpdateFolder={handleUpdateFolder}
+              handleFileSelect={handleFileSelect}
             />
           ))}
         </div>

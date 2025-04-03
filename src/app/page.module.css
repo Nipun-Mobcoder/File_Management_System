@@ -15,3 +15,30 @@
   background-color: #1c1f2e;
 }
 
+.editorContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminalContainer {
+  height: 300px;
+  width: 100%;
+  padding: 10px;
+  background: #1e1e1e;
+  border-radius: 4px;
+}
+
+.xterm-viewport {
+  overflow-y: auto !important;
+}
+
+.terminalPlaceholder {
+  height: 300px;
+  background: #1e1e1e;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}

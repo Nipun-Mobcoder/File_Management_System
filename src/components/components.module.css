@@ -46,12 +46,12 @@
   height: 22px;
   width: 22px;
   transition: color 0.2s ease, background-color 0.2s ease;
+  border-radius: 10px;
 }
 
 .icons:hover {
   color: black;
   background-color: white;
-  border-radius: 10px;
 }
 
 .folder {
